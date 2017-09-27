@@ -7,20 +7,41 @@
  * 4. Add comments and Javadoc comments where needed
  * 5. Remove unnecessary comments as appropriate
  */
+/**
+ * Reclamation Project class.
+ */
+public class ReclamationProject {
+    /**
+     * Finds the LCS (Longest Common Substring) found in 2 strings.
+     *
+     * @param first a string
+     * @param second a string
+     * @return a String
+     */
+    static String doit(final String first, final String second) {
+        String str1 = first;
+        String str2 = second;
+        if (str1.length() > str2.length()) {
+            String temp = str1;
+            //switch values of str1 and str2 using temporary string
+            str1 = str2;
+            str2 = temp;
+        }
+        //converts boolean value if string a = string b to string
+        String s = (str1.equals(str2)) + "";
 
-public class ReclamationProject
-{
-    static String doit(String a,String b){
-        if (a.length() > b.length()){
-            String c = a; // TODO: set c to a
-            a=b; b=c;}
-        String r = (a.equals(b)) ? "" : ""; // I love the ternary operator!
         /*
-         * For loop with i
+         * For loop that iterates through str1
          */
-        for (int i = 0; i < a.length(); i++) { for (int j = a.length() - i; j > 0; j--) {
-                for (int k = 0; k < b.length()- j; k++) {
-                    r = (a.regionMatches(i, b, k, j) && j >r.length()) ? a.substring(i,i + j) : r; // Do it!
-                        }} // Ah yeah
-        } return r; }
+        for (int i = 0; i < str1.length(); i++) { //iterates from 0 to end of str1
+            for (int j = str1.length() - i; j > 0; j--) { //iterates from end-i to beginning of str1
+                for (int k = 0; k < str2.length() - j; k++) { //iterates from 0 to end of str2
+                    if (str1.regionMatches(i, str2, k, j) && j > s.length()) {
+                        s = str1.substring(i, i + j);
+                    }
+                }
+            }
+        }
+        return s;
+    }
 }
